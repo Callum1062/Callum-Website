@@ -1,0 +1,33 @@
+name: Deploy Website
+
+ 
+
+on:
+
+push:
+
+branches:
+
+- main
+
+ 
+
+jobs:
+
+deploy:
+
+runs-on: ubuntu-latest
+
+ 
+
+steps:
+
+- name: Checkout Repository
+
+uses: actions/checkout@v4
+
+ 
+
+- name: Confirm Workflow Started
+
+run: echo "GitHub Actions workflow triggered successfully"

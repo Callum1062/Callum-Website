@@ -1,0 +1,25 @@
+# Terraform
+
+terraform/.terraform/
+
+*.tfstate
+
+*.tfstate.backup
+
+*.tfplan
+
+ 
+
+# SSH*Keys
+
+*.pem
+
+*.key
+
+ 
+
+# Python
+
+__py*ache__/
+
+ 
