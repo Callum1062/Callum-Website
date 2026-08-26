@@ -1,81 +1,43 @@
 ---
 
 - name: Configure EC2 Web Server
+  hosts: webservers
+  become: true
 
-hosts: webservers
+  tasks:
+    - name: Install Nginx
+      dnf:
+        name: nginx
+        state: present
 
-become: true
+    - name: Enable Nginx
+      service:
+        name: nginx
+        enabled: true
 
- 
+    - name: Start Nginx
+      service:
+        name: nginx
+        state: started
 
-tasks:
+    - name: Copy HTML
+      copy:
+        src: ../website/CallumWebsite.html
+        dest: /usr/share/nginx/html/index.html
 
- 
+    - name: Copy CSS
+      copy:
+        src: ../website/CallumWebsite.css
+        dest: /usr/share/nginx/html/CallumWebsite.css
 
-- name: Install Nginx
+    - name: Copy JavaScript
+      copy:
+        src: ../website/CallumWebsite.js
+        dest: /usr/share/nginx/html/CallumWebsite.js
 
-dnf:
-
-name: nginx
-
-state: present
-
- 
-
-- name: Enable Nginx
-
-service:
-
-name: nginx
-
-enabled: true
-
- 
-
-- name: Start Nginx
-
-service:
-
-name: nginx
-
-state: started
-
- 
-
-- name: Copy HTML
-
-copy:
-
-src: ../website/index.html
-
-dest: /usr/share/nginx/html/index.html
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
 
  
-
-- name: Copy CSS
-
-copy:
-
-src: ../website/CallumWebsite.css
-
-dest: /usr/share/nginx/html/CallumWebsite.css
-
- 
-
-- name: Copy JavaScript
-
-copy:
-
-src: ../website/CallumWebsite.js
-
-dest: /usr/share/nginx/html/CallumWebsite.js
-
- 
-
-- name: Restart Nginx
-
-service:
-
-name: nginx
-
-state: restarted
